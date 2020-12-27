@@ -1,0 +1,12 @@
+services:
+  web:
+    build: .
+    ports:
+      - 5000:5000
+      - 9229:9229
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    command: yarn dev
+    environment:
+      PORT: 5000
