@@ -1,5 +1,5 @@
 {
-  "name": "ultimate-node-base",
+  "name": "ultimate-node-stack",
   "version": "1.0.0",
   "main": "src/index.ts",
   "license": "MIT",
