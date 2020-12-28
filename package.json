@@ -8,8 +8,8 @@
     "db:console": "docker-compose exec postgres psql -h localhost -U postgres -d webapp_dev",
     "db:migrate": "knex migrate:latest",
     "dev": "node -r ts-node/register --inspect=0.0.0.0 src/index.ts",
-    "docker:db:migrate": "docker-compose exec web yarn db:migrate",
-    "docker:db:migrate:undo": "docker-compose exec web npx knex migrate:down",
+    "docker:db:migrate": "docker-compose run web yarn db:migrate",
+    "docker:db:migrate:undo": "docker-compose run web npx knex migrate:down",
     "rebuild:web": "docker-compose build web && docker-compose rm -fs web && docker-compose up -d",
     "start": "node dist/index.js"
   },
