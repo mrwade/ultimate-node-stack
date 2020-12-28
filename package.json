@@ -6,8 +6,6 @@
   "scripts": {
     "build": "rimraf dist && tsc",
     "db:console": "docker-compose exec postgres psql -h localhost -U postgres -d webapp_dev",
-    "db:migrate": "npx prisma migrate deploy --preview-feature",
-    "db:migrate:dev": "docker-compose exec web npx prisma migrate dev --preview-feature",
     "start": "node dist/index.js",
     "dev": "ts-node src/index.ts"
   },
