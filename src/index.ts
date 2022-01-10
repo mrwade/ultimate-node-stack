@@ -1,21 +1,41 @@
-import Fastify from 'fastify';
+import { PrismaClient } from '@prisma/client';
+import express from 'express';
+import morgan from 'morgan';
+import { nanoid } from 'nanoid';
 
-// Require the framework and instantiate it
-const fastify = Fastify({ logger: true });
+const db = new PrismaClient({ log: ['error', 'info', 'query', 'warn'] });
+const genId = () => nanoid(16);
 
-// Declare a route
-fastify.get('/', async () => {
-  return { hello: 'world' };
-});
-
-// Run the server!
-const port = process.env.PORT ?? 8080;
-const start = async () => {
-  try {
-    await fastify.listen(port, '0.0.0.0');
-  } catch (err) {
-    fastify.log.error(err);
-    process.exit(1);
+const seedDatabase = async () => {
+  if ((await db.post.count()) === 0) {
+    await db.post.createMany({
+      data: [
+        {
+          id: genId(),
+          slug: 'ultimate-node-stack',
+          title: 'Ultimate Node Stack 2022',
+          publishedAt: new Date(),
+        },
+        {
+          id: genId(),
+          slug: 'draft-post',
+          title: 'Draft Post',
+        },
+      ],
+    });
   }
 };
-start();
+seedDatabase();
+
+const app = express();
+app.use(morgan('dev'));
+
+app.get('/', async (req, res) => {
+  const posts = await db.post.findMany();
+  res.json(posts);
+});
+
+const port = Number(process.env.PORT ?? 8080);
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Server started at http://localhost:${port}`);
+});

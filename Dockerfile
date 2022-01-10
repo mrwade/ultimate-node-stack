@@ -1,9 +1,8 @@
-FROM node:16.7
+FROM node:17.3
 
 WORKDIR /usr/src/app
 
-COPY package.json ./
-COPY yarn.lock ./
+COPY package.json yarn.lock ./
 RUN yarn install
 
 COPY prisma/schema.prisma ./prisma/

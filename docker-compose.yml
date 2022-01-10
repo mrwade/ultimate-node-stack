@@ -1,24 +1,25 @@
+version: '2'
+
 services:
   postgres:
-    image: postgres:11-alpine
-    restart: always
+    image: postgres:14-alpine
     ports:
-      - 5432:5432 # enables connecting locally via psql
+      - 5432:5432
     environment:
       POSTGRES_DB: webapp_dev
       POSTGRES_HOST_AUTH_METHOD: trust
 
-  web:
+  backend:
     build: .
     depends_on:
       - postgres
     ports:
-      - 5000:5000
-      - 9229:9229
+      - 8000:8000
+      - 9229:9229 # debugger port
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
-    command: yarn dev
+    command: yarn start:docker
     environment:
       DATABASE_URL: postgres://postgres@postgres/webapp_dev
-      PORT: 5000
+      PORT: 8000

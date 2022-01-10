@@ -1,4 +1,4 @@
-import * as Knex from 'knex';
+import { Knex } from 'knex';
 
 export async function up(knex: Knex): Promise<void> {
   await knex.schema.createTable('posts', (table) => {
@@ -6,7 +6,7 @@ export async function up(knex: Knex): Promise<void> {
     table.string('slug', 60).notNullable().unique();
     table.string('title', 80).notNullable();
     table.text('content');
-    table.boolean('published').notNullable().defaultTo(false);
+    table.timestamp('publishedAt');
     table.timestamp('createdAt').notNullable().defaultTo(knex.fn.now());
     table.timestamp('updatedAt').notNullable();
   });
