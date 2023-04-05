@@ -19,5 +19,5 @@ model Post {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 
-  @@map("posts")
+  @@map(name: "posts") // use "posts" as the table name
 }

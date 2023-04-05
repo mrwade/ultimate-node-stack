@@ -1,7 +1,7 @@
 {
   "env": {
     "targets": {
-      "node": 17
+      "node": 18
     }
   },
   "jsc": {

@@ -4,7 +4,7 @@
     {
       "label": "restart backend",
       "type": "shell",
-      "command": "docker-compose restart backend",
+      "command": "docker compose restart backend",
       "presentation": {
         "reveal": "never"
       }

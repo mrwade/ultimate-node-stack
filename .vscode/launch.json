@@ -5,15 +5,10 @@
       "type": "node",
       "request": "attach",
       "name": "Node (Docker)",
-      "protocol": "inspector",
       "port": 9229,
       "restart": true,
-      "localRoot": "${workspaceFolder}/src",
-      "remoteRoot": "/usr/src/app/src",
+      "remoteRoot": "/usr/src/app",
       "sourceMaps": true,
-      "sourceMapPathOverrides": {
-        "/usr/src/app/src/*": "${workspaceFolder}/src/*"
-      },
       "skipFiles": [
         "/usr/src/app/node_modules/**/*.js",
         "<node_internals>/**"
